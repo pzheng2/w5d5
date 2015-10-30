@@ -30,11 +30,11 @@ var TowersOfHanoi = {
 
   promptMove: function(callback) {
     this.print();
-    reader.question("Where do you want to move from: ", function(answer) {
-      reader.question("Where do you want to move to: ", function(answer2) {
-        callback(parseInt(answer), parseInt(answer2));
-      }.bind(this));
-    }.bind(this));
+    reader.question("Where do you want to move from: ", function(startTowerIdx) {
+      reader.question("Where do you want to move to: ", function(endTowerIdx) {
+        callback(parseInt(startTowerIdx), parseInt(endTowerIdx));
+      })
+    })
   },
 
   run: function(completionCallback) {
@@ -42,7 +42,6 @@ var TowersOfHanoi = {
       if (!this.move(startTowerIdx, endTowerIdx)) {
         console.log("invalid move");
       }
-      this.print()
       if (this.isWon()) {
         console.log("you won!");
         completionCallback();
